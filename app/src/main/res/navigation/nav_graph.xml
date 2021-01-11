@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/newsListFragment"
-        android:name="com.animsh.newsdeap.NewsListFragment"
+        android:name="com.animsh.newsdeap.ui.NewsListFragment"
         android:label="fragment_news_list"
         tools:layout="@layout/fragment_news_list" />
     <fragment
         android:id="@+id/newsFavFragment"
-        android:name="com.animsh.newsdeap.NewsFavFragment"
+        android:name="com.animsh.newsdeap.ui.NewsFavFragment"
         android:label="fragment_news_fav"
         tools:layout="@layout/fragment_news_fav" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.animsh.newsdeap.SearchFragment"
+        android:name="com.animsh.newsdeap.ui.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.animsh.newsdeap.SettingFragment"
+        android:name="com.animsh.newsdeap.ui.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.animsh.newsdeap;
+package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,20 +7,20 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class SearchFragment extends Fragment {
+import com.animsh.newsdeap.R;
 
-    public SearchFragment() {
-    }
+public class NewsListFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_news_list, container, false);
     }
 }
