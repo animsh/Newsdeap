@@ -9,6 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="ripple_color">#1F6200EE</color>
 
+    <!--    // news image background color-->
+    <color name="purple">#905EE8</color>
+    <color name="red">#F96335</color>
+    <color name="material_black">#1E1E1E</color>
+    <color name="blue">#008DFC</color>
+    <color name="yellow">#FED149</color>
 
     <!--    // dark theme colors-->
     <color name="dark_primary_color">#141414</color>
