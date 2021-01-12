@@ -2,6 +2,7 @@ package com.animsh.newsdeap.util;
 
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 import com.animsh.newsdeap.R;
@@ -44,5 +45,13 @@ public class BindingAdapters {
                 imageView.setBackgroundColor(imageView.getContext().getResources().getColor(R.color.red));
 
         }
+    }
+
+    @BindingAdapter("set_checked")
+    public static void toggleFavButton(ImageView imageView, boolean isFav) {
+        if (isFav)
+            imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+        else
+            imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
     }
 }

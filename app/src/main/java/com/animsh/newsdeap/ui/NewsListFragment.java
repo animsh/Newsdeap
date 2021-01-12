@@ -1,6 +1,7 @@
 package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.data.FakeDataSource;
@@ -20,6 +22,7 @@ public class NewsListFragment extends Fragment {
 
     RecyclerView newsRecyclerView;
     NewsListAdapter adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public NewsListFragment() {
     }
@@ -35,6 +38,29 @@ public class NewsListFragment extends Fragment {
 
         FakeDataSource fakeDataSource = new FakeDataSource();
         adapter.submitList(fakeDataSource.getFakeListNews());
+
+        swipeRefreshLayout = view.findViewById(R.id.newsLisSwipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.submitList(fakeDataSource.getFakeUpdatedStaticListNews());
+                        swipeRefreshLayout.setRefreshing(false);
+
+                        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                            @Override
+                            public void onItemRangeInserted(int positionStart, int itemCount) {
+                                super.onItemRangeInserted(positionStart, itemCount);
+                                newsRecyclerView.smoothScrollToPosition(positionStart);
+                            }
+                        });
+                    }
+                }, 500);
+            }
+        });
     }
 
     @Override
