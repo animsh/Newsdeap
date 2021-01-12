@@ -1,7 +1,5 @@
 package com.animsh.newsdeap.ui.news;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
 
 import com.animsh.newsdeap.data.NewsItem;
@@ -12,13 +10,17 @@ import com.animsh.newsdeap.databinding.ItemNewsTextBinding;
  * Created by animsh on 1/11/2021.
  */
 public class ImageViewHolder extends BaseViewHolder {
-    public ImageViewHolder(@NonNull View itemView) {
-        super(itemView);
+
+    ItemNewsImageBinding itemNewsImageBinding;
+
+    public ImageViewHolder(@NonNull ItemNewsImageBinding itemNewsImageBinding) {
+        super(itemNewsImageBinding.getRoot());
+        this.itemNewsImageBinding = itemNewsImageBinding;
     }
 
     @Override
     public void bindData(NewsItem item) {
-
+        itemNewsImageBinding.setNewsItemImage(item);
     }
 
     @Override
