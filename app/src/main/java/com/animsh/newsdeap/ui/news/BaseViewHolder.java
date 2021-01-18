@@ -5,7 +5,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.animsh.newsdeap.data.NewsItem;
+import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.ItemNewsImageBinding;
 import com.animsh.newsdeap.databinding.ItemNewsTextBinding;
 
@@ -17,7 +17,7 @@ abstract class BaseViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public abstract void bindData(NewsItem item);
+    public abstract void bindData(Article item);
 
     // for shared view animation
     public abstract ItemNewsTextBinding getItemNewsTextBinding();

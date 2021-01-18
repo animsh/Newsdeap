@@ -6,7 +6,7 @@
 
         <variable
             name="NewsItemImage"
-            type="com.animsh.newsdeap.data.NewsItem" />
+            type="com.animsh.newsdeap.data.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/item_news_img_newsimg"
-            glide_url="@{NewsItemImage.newsImg}"
+            glide_url="@{NewsItemImage.urlToImage}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -26,47 +26,50 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            set_background="@{NewsItemImage.bgColor}"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:alpha="0.9"
+            android:layout_height="100dp"
+            android:alpha="0.95"
+            android:background="?attr/background_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/item_news_img_userimg"
-            glide_circular_url="@{NewsItemImage.userImg}"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/item_news_img_title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:scrollHorizontally="true"
             android:text="@{NewsItemImage.title}"
-            android:textColor="@color/dark_text_color"
-            app:layout_constraintBottom_toTopOf="@+id/item_news_img_userimg"
+            android:textColor="?attr/text_color"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/item_news_img_username"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/item_news_img_username"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{NewsItemImage.username}"
-            android:textColor="@color/dark_text_color"
-            app:layout_constraintBottom_toBottomOf="@+id/item_news_img_userimg"
-            app:layout_constraintStart_toEndOf="@+id/item_news_img_userimg"
-            app:layout_constraintTop_toTopOf="@+id/item_news_img_userimg" />
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="@{NewsItemImage.source.name}"
+            android:textColor="?attr/text_color"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

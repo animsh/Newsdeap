@@ -2,6 +2,7 @@ package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.animsh.newsdeap.R;
-import com.animsh.newsdeap.data.FakeDataSource;
+import com.animsh.newsdeap.data.NewsCollection;
 import com.animsh.newsdeap.ui.news.DiffUtilNewsItemCallback;
 import com.animsh.newsdeap.ui.news.NewsListAdapter;
+import com.animsh.newsdeap.util.NewsApiCall;
+import com.animsh.newsdeap.util.RetrofitClient;
+
+import org.jetbrains.annotations.NotNull;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class NewsListFragment extends Fragment {
 
+    private static final String TAG = "NEWS_List";
     RecyclerView newsRecyclerView;
     NewsListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
+    NewsCollection newsCollection;
 
     public NewsListFragment() {
     }
@@ -36,8 +48,23 @@ public class NewsListFragment extends Fragment {
         adapter = new NewsListAdapter(new DiffUtilNewsItemCallback());
         newsRecyclerView.setAdapter(adapter);
 
-        FakeDataSource fakeDataSource = new FakeDataSource();
-        adapter.submitList(fakeDataSource.getFakeListNews());
+        Retrofit retrofit = RetrofitClient.getClient();
+        NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
+        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines("in", getString(R.string.api_key));
+
+        topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
+            @Override
+            public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
+                newsCollection = response.body();
+                adapter.submitList(newsCollection.getArticles());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
 
         swipeRefreshLayout = view.findViewById(R.id.newsLisSwipe);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -47,7 +74,7 @@ public class NewsListFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.submitList(fakeDataSource.getFakeUpdatedStaticListNews());
+                        adapter.submitList(newsCollection.getArticles());
                         swipeRefreshLayout.setRefreshing(false);
 
                         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {

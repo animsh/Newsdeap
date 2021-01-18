@@ -9,21 +9,20 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.animsh.newsdeap.R;
-import com.animsh.newsdeap.data.NewsItem;
+import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.ItemNewsImageBinding;
 import com.animsh.newsdeap.databinding.ItemNewsTextBinding;
 
 /**
  * Created by animsh on 1/12/2021.
  */
-public class NewsListAdapter extends ListAdapter<NewsItem, BaseViewHolder> {
+public class NewsListAdapter extends ListAdapter<Article, BaseViewHolder> {
 
     public static final int VIEW_TYPE_NEWS_TEXT = 0;
     public static final int VIEW_TYPE_NEWS_IMAGE = 1;
-    public static final int VIEW_TYPE_NEWS_VIDEO = 2;
     OnNewsItemClickEvent listener;
 
-    public NewsListAdapter(@NonNull DiffUtil.ItemCallback<NewsItem> diffCallback) {
+    public NewsListAdapter(@NonNull DiffUtil.ItemCallback<Article> diffCallback) {
         super(diffCallback);
     }
 
@@ -33,7 +32,11 @@ public class NewsListAdapter extends ListAdapter<NewsItem, BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return getItem(position).getViewType();
+        if (getItem(position).getUrlToImage() != null) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @NonNull

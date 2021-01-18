@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     NavHostFragment navHostFragment;
     BottomNavigationView bottomNavigationView;
+    String TAG = "Main_Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

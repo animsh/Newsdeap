@@ -2,7 +2,7 @@ package com.animsh.newsdeap.ui.news;
 
 import androidx.annotation.NonNull;
 
-import com.animsh.newsdeap.data.NewsItem;
+import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.ItemNewsImageBinding;
 import com.animsh.newsdeap.databinding.ItemNewsTextBinding;
 
@@ -19,7 +19,7 @@ public class ImageViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindData(NewsItem item) {
+    public void bindData(Article item) {
         itemNewsImageBinding.setNewsItemImage(item);
     }
 

@@ -7,7 +7,7 @@
 
         <variable
             name="NewsItemData"
-            type="com.animsh.newsdeap.data.NewsItem" />
+            type="com.animsh.newsdeap.data.Article" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/details_img_news"
-                glide_url="@{NewsItemData.newsImg}"
+                glide_url="@{NewsItemData.urlToImage}"
                 android:layout_width="0dp"
                 android:layout_height="210dp"
                 android:scaleType="centerCrop"
@@ -31,33 +31,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-            <ImageView
-                android:id="@+id/details_img_user"
-                glide_circular_url="@{NewsItemData.userImg}"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/details_img_news"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_img_news"
-                tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/details_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:lineSpacingExtra="4sp"
                 android:text="@{NewsItemData.title}"
                 android:textColor="?attr/text_color"
-                android:textSize="36sp"
+                android:textSize="30sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_img_user" />
+                app:layout_constraintTop_toBottomOf="@+id/details_img_news" />
 
             <TextView
                 android:id="@+id/details_username_date"
@@ -65,14 +54,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{NewsItemData.username}"
+                android:text="@{NewsItemData.source.name}"
                 android:textColor="@color/blue"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_title" />
 
             <ImageView
                 android:id="@+id/details_img_fav"
-                set_checked="@{NewsItemData.fav}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -80,6 +69,22 @@
                 app:layout_constraintBottom_toBottomOf="@+id/details_username_date"
                 app:layout_constraintStart_toEndOf="@+id/details_username_date"
                 app:layout_constraintTop_toTopOf="@+id/details_username_date" />
+
+            <TextView
+                android:id="@+id/details_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@{NewsItemData.description}"
+                android:textColor="?attr/text_color"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_username_date" />
 
             <TextView
                 android:id="@+id/details_content"
@@ -92,10 +97,10 @@
                 android:layout_marginRight="16dp"
                 android:text="@{NewsItemData.content}"
                 android:textColor="?attr/text_color"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_username_date" />
+                app:layout_constraintTop_toBottomOf="@+id/details_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
