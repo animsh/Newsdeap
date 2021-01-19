@@ -1,42 +1,21 @@
 package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 
 import com.animsh.newsdeap.R;
+import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.FragmentNewsDetailsBinding;
 
-public class NewsDetailsFragment extends Fragment {
-
-    public NewsDetailsFragment() {
-    }
+public class NewsDetailsFragment extends AppCompatActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        FragmentNewsDetailsBinding fragmentNewsDetailsBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(getContext()),
-                R.layout.fragment_news_details,
-                container,
-                false
-        );
-
-//        FakeDataSource fakeDataSource = new FakeDataSource();
-//        NewsItem item = fakeDataSource.generateRandomNewsItem();
-//
-//        fragmentNewsDetailsBinding.setNewsItemData(item);
-        return fragmentNewsDetailsBinding.getRoot();
+        Article article = (Article) getIntent().getSerializableExtra("Article");
+        FragmentNewsDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.fragment_news_details);
+        binding.setNewsItemData(article);
     }
 }

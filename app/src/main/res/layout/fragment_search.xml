@@ -8,14 +8,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search_news"
+            android:id="@+id/rv_news_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="72dp" />
+            android:paddingTop="75dp" />
+
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.appbar.CollapsingToolbarLayout

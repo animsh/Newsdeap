@@ -1,7 +1,10 @@
 package com.animsh.newsdeap.ui.news;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +15,7 @@ import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.ItemNewsImageBinding;
 import com.animsh.newsdeap.databinding.ItemNewsTextBinding;
+import com.animsh.newsdeap.ui.NewsDetailsFragment;
 
 /**
  * Created by animsh on 1/12/2021.
@@ -64,12 +68,21 @@ public class NewsListAdapter extends ListAdapter<Article, BaseViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.bindData(getItem(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), NewsDetailsFragment.class);
+                intent.putExtra("Article", getItem(position));
+                holder.itemView.getContext().startActivity(intent);
+                Toast.makeText(holder.itemView.getContext(), getItem(position).getTitle(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public interface OnNewsItemClickEvent {
-        void onItemTextClick();
+        void onItemTextClick(Article item);
 
-        void onItemImageClick();
+        void onItemImageClick(Article item);
 
         void onItemLongClick();
     }

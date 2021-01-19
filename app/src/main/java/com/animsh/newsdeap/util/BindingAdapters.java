@@ -1,6 +1,9 @@
 package com.animsh.newsdeap.util;
 
 import android.graphics.Bitmap;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -61,6 +64,16 @@ public class BindingAdapters {
             imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
         else
             imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
+    }
+
+    @BindingAdapter("set_webpage")
+    public static void setWebPage(WebView webPage, String url) {
+        webPage.getSettings().setDomStorageEnabled(true);
+        webPage.getSettings().setJavaScriptEnabled(true);
+        webPage.getSettings().setLoadsImagesAutomatically(true);
+        webPage.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webPage.setWebViewClient(new WebViewClient());
+        webPage.loadUrl(url);
     }
 
     public static Palette.Swatch getDominantSwatch(Palette palette) {

@@ -48,27 +48,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_img_news" />
 
-            <TextView
-                android:id="@+id/details_username_date"
+
+            <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@{NewsItemData.source.name}"
-                android:textColor="@color/blue"
-                android:textSize="14sp"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_title" />
+                app:layout_constraintTop_toBottomOf="@+id/details_title">
+
+                <TextView
+                    android:id="@+id/details_source_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{NewsItemData.source.name}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/details_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{NewsItemData.author}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/details_img_fav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_margin="20dp"
                 android:src="@drawable/ic_round_favorite_24"
-                app:layout_constraintBottom_toBottomOf="@+id/details_username_date"
-                app:layout_constraintStart_toEndOf="@+id/details_username_date"
-                app:layout_constraintTop_toTopOf="@+id/details_username_date" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/details_img_news" />
 
             <TextView
                 android:id="@+id/details_description"
@@ -81,26 +101,35 @@
                 android:layout_marginRight="16dp"
                 android:text="@{NewsItemData.description}"
                 android:textColor="?attr/text_color"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_username_date" />
+                app:layout_constraintTop_toBottomOf="@+id/linear" />
 
             <TextView
                 android:id="@+id/details_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:text="@{NewsItemData.content}"
                 android:textColor="?attr/text_color"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_description" />
+
+            <WebView
+                android:id="@+id/url_webpage"
+                set_webpage="@{NewsItemData.url}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_content" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

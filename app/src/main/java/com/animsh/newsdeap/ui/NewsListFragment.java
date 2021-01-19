@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.animsh.newsdeap.R;
+import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.data.NewsCollection;
 import com.animsh.newsdeap.ui.news.DiffUtilNewsItemCallback;
 import com.animsh.newsdeap.ui.news.NewsListAdapter;
@@ -86,6 +88,23 @@ public class NewsListFragment extends Fragment {
                         });
                     }
                 }, 500);
+            }
+        });
+
+        adapter.setOnNewsItemClickListener(new NewsListAdapter.OnNewsItemClickEvent() {
+            @Override
+            public void onItemTextClick(Article item) {
+
+            }
+
+            @Override
+            public void onItemImageClick(Article item) {
+                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onItemLongClick() {
+
             }
         });
     }

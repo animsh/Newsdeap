@@ -1,9 +1,11 @@
 package com.animsh.newsdeap.data;
 
+import java.io.Serializable;
+
 /**
  * Created by animsh on 1/18/2021.
  */
-public class NewsSource {
+public class NewsSource implements Serializable {
     private String id;
     private String name;
 
