@@ -5,6 +5,7 @@
         <attr name="background_color" format="color" />
         <attr name="text_color" format="color" />
         <attr name="search_color" format="color" />
+        <attr name="icon_tint_color" format="color" />
 
     </declare-styleable>
 </resources>
