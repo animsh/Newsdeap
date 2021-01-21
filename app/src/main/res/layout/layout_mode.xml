@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_mode_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="?attr/background_color">
+
+    <RadioGroup
+        android:id="@+id/modeGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <RadioButton
+            android:id="@+id/modeDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="default"
+            android:text="System Default"
+            android:textColor="?attr/text_color" />
+
+        <RadioButton
+            android:id="@+id/modeLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="light"
+            android:text="Light Mode"
+            android:textColor="?attr/text_color" />
+
+        <RadioButton
+            android:id="@+id/modeDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="dark"
+            android:text="Dark Mode"
+            android:textColor="?attr/text_color" />
+    </RadioGroup>
+</LinearLayout>
