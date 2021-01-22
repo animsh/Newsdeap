@@ -19,15 +19,30 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.animsh.newsdeap.R;
+import com.animsh.newsdeap.data.Country;
+import com.animsh.newsdeap.ui.news.CountryListAdapter;
+import com.animsh.newsdeap.ui.news.DiffUtilCountryItemCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
 
     LinearLayout layoutCountry, layoutMode, layoutAbout;
     String TAG = "SETTING_TAG";
     String selectedMode = "default";
-    AlertDialog dialogMode;
+    AlertDialog dialogMode, dialogCountry;
     SharedPreferences myPref;
     SharedPreferences.Editor editor;
     TextView txtSelectedMode;
@@ -87,6 +102,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getTag().toString()) {
             case "layoutCountry":
+                showCountryDialog(view.getContext());
                 Toast.makeText(getContext(), view.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "layoutMode":
@@ -161,6 +177,61 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             }
         }
         dialogMode.show();
+    }
+
+    private void showCountryDialog(Context context) {
+        if (dialogCountry == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            View view = LayoutInflater.from(context).inflate(
+                    R.layout.layout_country,
+                    (ViewGroup) ((Activity) context).findViewById(R.id.layout_country_container)
+            );
+            builder.setView(view);
+
+            dialogCountry = builder.create();
+            if (dialogCountry.getWindow() != null) {
+                dialogCountry.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+
+            RecyclerView countryRecycler = view.findViewById(R.id.rv_country);
+            countryRecycler.setLayoutManager(new LinearLayoutManager(context));
+            CountryListAdapter countryListAdapter = new CountryListAdapter(new DiffUtilCountryItemCallback());
+            countryRecycler.setAdapter(countryListAdapter);
+            JSONObject object = null;
+            List<Country> countryList = new ArrayList<>();
+            try {
+                object = new JSONObject(readJSON(requireContext()));
+                JSONArray countries = object.getJSONArray("countries");
+                for (int i = 0; i < object.getJSONArray("countries").length(); i++) {
+                    Country country = new Country(countries.getJSONObject(i).getString("country"), countries.getJSONObject(i).getString("abbreviation"));
+                    countryList.add(country);
+                }
+                Log.d(TAG, "showCountryDialog: " + countryList.size());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            countryListAdapter.submitList(countryList);
+        }
+        dialogCountry.show();
+    }
+
+    public String readJSON(Context context) {
+        String json = null;
+        try {
+            // Opening data.json file
+            InputStream inputStream = context.getAssets().open("countries.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            // read values in the byte array
+            inputStream.read(buffer);
+            inputStream.close();
+            // convert byte to string
+            json = new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return json;
+        }
+        return json;
     }
 
 }
