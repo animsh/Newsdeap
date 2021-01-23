@@ -30,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
+
 public class NewsListFragment extends Fragment {
 
     private static final String TAG = "NEWS_List";
@@ -52,7 +54,7 @@ public class NewsListFragment extends Fragment {
 
         Retrofit retrofit = RetrofitClient.getClient();
         NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines("in", getString(R.string.api_key));
+        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, getString(R.string.api_key));
 
         topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
             @Override

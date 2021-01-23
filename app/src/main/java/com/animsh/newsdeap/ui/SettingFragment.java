@@ -1,5 +1,6 @@
 package com.animsh.newsdeap.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,26 +24,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.animsh.newsdeap.R;
-import com.animsh.newsdeap.data.Country;
 import com.animsh.newsdeap.ui.news.CountryListAdapter;
 import com.animsh.newsdeap.ui.news.DiffUtilCountryItemCallback;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import static com.animsh.newsdeap.ui.MainActivity.countryList;
+import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
 
+    public static AlertDialog dialogMode, dialogCountry;
+    @SuppressLint("StaticFieldLeak")
+    public static TextView txtCurrentCountry;
     LinearLayout layoutCountry, layoutMode, layoutAbout;
     String TAG = "SETTING_TAG";
     String selectedMode = "default";
-    AlertDialog dialogMode, dialogCountry;
     SharedPreferences myPref;
     SharedPreferences.Editor editor;
     TextView txtSelectedMode;
@@ -67,6 +62,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         layoutMode = view.findViewById(R.id.layout_mode);
         layoutAbout = view.findViewById(R.id.layout_about);
         txtSelectedMode = view.findViewById(R.id.selectedMode);
+        txtCurrentCountry = view.findViewById(R.id.currentCountry);
+
+        for (int i = 0; i < countryList.size(); i++) {
+            if (countryList.get(i).getAbbreviation().toLowerCase().equals(currentCountry)) {
+                txtCurrentCountry.setText(countryList.get(i).getCountry());
+            }
+        }
 
         layoutCountry.setTag("layoutCountry");
         layoutMode.setTag("layoutMode");
@@ -197,41 +199,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             countryRecycler.setLayoutManager(new LinearLayoutManager(context));
             CountryListAdapter countryListAdapter = new CountryListAdapter(new DiffUtilCountryItemCallback());
             countryRecycler.setAdapter(countryListAdapter);
-            JSONObject object = null;
-            List<Country> countryList = new ArrayList<>();
-            try {
-                object = new JSONObject(readJSON(requireContext()));
-                JSONArray countries = object.getJSONArray("countries");
-                for (int i = 0; i < object.getJSONArray("countries").length(); i++) {
-                    Country country = new Country(countries.getJSONObject(i).getString("country"), countries.getJSONObject(i).getString("abbreviation"));
-                    countryList.add(country);
-                }
-                Log.d(TAG, "showCountryDialog: " + countryList.size());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             countryListAdapter.submitList(countryList);
         }
         dialogCountry.show();
-    }
-
-    public String readJSON(Context context) {
-        String json = null;
-        try {
-            // Opening data.json file
-            InputStream inputStream = context.getAssets().open("countries.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            // read values in the byte array
-            inputStream.read(buffer);
-            inputStream.close();
-            // convert byte to string
-            json = new String(buffer, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return json;
-        }
-        return json;
     }
 
 }
