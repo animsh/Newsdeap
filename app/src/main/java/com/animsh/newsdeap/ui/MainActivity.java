@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             object = new JSONObject(readJSON(this));
             JSONArray countries = object.getJSONArray("countries");
+            countryList.clear();
             for (int i = 0; i < object.getJSONArray("countries").length(); i++) {
                 Country country = new Country(countries.getJSONObject(i).getString("country"), countries.getJSONObject(i).getString("abbreviation"));
                 countryList.add(country);
