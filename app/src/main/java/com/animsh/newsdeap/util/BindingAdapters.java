@@ -5,7 +5,6 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -20,17 +19,8 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.Locale;
-
-import static com.animsh.newsdeap.ui.MainActivity.countryList;
-import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
 
 /**
  * Created by animsh on 1/12/2021.
@@ -84,33 +74,6 @@ public class BindingAdapters {
         webPage.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webPage.setWebViewClient(new WebViewClient());
         webPage.loadUrl(url);
-    }
-
-    @BindingAdapter("set_time_date")
-    public static void setDateTime(TextView textView, String t) {
-        String locale = null;
-        for (int i = 0; i < countryList.size(); i++) {
-            if (countryList.get(i).getAbbreviation().toLowerCase().equals(currentCountry)) {
-                locale = countryList.get(i).getCountry().toLowerCase();
-            }
-        }
-        PrettyTime prettyTime = new PrettyTime(new Locale(locale));
-        String time = null;
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
-            Date date = simpleDateFormat.parse(t);
-            time = prettyTime.format(date);
-            textView.setText(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static String getCountry() {
-        Locale locale = Locale.getDefault();
-        String country = locale.getCountry();
-        return country.toLowerCase();
     }
 
     public static Palette.Swatch getDominantSwatch(Palette palette) {

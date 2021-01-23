@@ -123,8 +123,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 editor = myPref.edit();
                 editor.putString("mode", "default");
                 editor.apply();
-                dialogCountry = null;
-                dialogMode = null;
                 break;
             case "dark":
                 if (dialogMode != null)
@@ -135,8 +133,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 editor = myPref.edit();
                 editor.putString("mode", "dark");
                 editor.apply();
-                dialogCountry = null;
-                dialogMode = null;
                 break;
             case "light":
                 if (dialogMode != null)
@@ -147,8 +143,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 editor = myPref.edit();
                 editor.putString("mode", "light");
                 editor.apply();
-                dialogCountry = null;
-                dialogMode = null;
                 break;
         }
 
@@ -189,10 +183,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     private void showCountryDialog(Context context) {
         if (dialogCountry == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            View view = LayoutInflater.from(requireContext()).inflate(
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            View view = LayoutInflater.from(context).inflate(
                     R.layout.layout_country,
-                    (ViewGroup) ((Activity) requireContext()).findViewById(R.id.layout_country_container)
+                    (ViewGroup) ((Activity) context).findViewById(R.id.layout_country_container)
             );
             builder.setView(view);
 
@@ -202,7 +196,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             }
 
             RecyclerView countryRecycler = view.findViewById(R.id.rv_country);
-            countryRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+            countryRecycler.setLayoutManager(new LinearLayoutManager(context));
             CountryListAdapter countryListAdapter = new CountryListAdapter(new DiffUtilCountryItemCallback());
             countryRecycler.setAdapter(countryListAdapter);
             countryListAdapter.submitList(countryList);
