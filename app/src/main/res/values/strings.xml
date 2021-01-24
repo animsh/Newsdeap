@@ -1,6 +1,25 @@
 <resources>
-    <string name="app_name">Newsdeap</string>
+    <string name="app_name">NewsDeap</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="api_key">254ecaadb56545158bbefa3a0734d47b</string>
+    <string name="api_key">Your Api Key</string>
+    <string name="news_image">News Image</string>
+    <string name="add_to_favorite_news_button">Add to Favorite News Button</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="search_news">Search news</string>
+    <string name="setting">Setting</string>
+    <string name="news_setting">News Setting</string>
+    <string name="country_icon">Country Icon</string>
+    <string name="country">Country</string>
+    <string name="system_default">System Default</string>
+    <string name="other">Other</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="about_icon">About Icon</string>
+    <string name="about">About</string>
+    <string name="about_newsdeap">About NewsDeap</string>
+    <string name="dark_mode_icon">Dark Mode Icon</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="home">Home</string>
+    <string name="fav">Fav</string>
+    <string name="search">Search</string>
 </resources>

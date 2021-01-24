@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.NewsListFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news_list"
         android:layout_width="match_parent"

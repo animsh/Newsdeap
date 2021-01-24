@@ -5,21 +5,21 @@
     <item
         android:id="@+id/newsListFragment"
         android:icon="@drawable/ic_round_public_24"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/newsFavFragment"
         android:icon="@drawable/ic_round_favorite_24"
-        android:title="Fav" />
+        android:title="@string/fav" />
 
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_round_search_24"
-        android:title="Search" />
+        android:title="@string/search" />
 
     <item
         android:id="@+id/settingFragment"
         android:icon="@drawable/ic_round_settings_24"
-        android:title="Setting" />
+        android:title="@string/setting" />
 
 </menu>

@@ -6,12 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Newsdeap">
+        android:theme="@style/Theme.NewsDeap">
         <activity android:name=".ui.NewsDetailsFragment" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>

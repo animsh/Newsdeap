@@ -51,7 +51,7 @@ public class CountryListAdapter extends ListAdapter<Country, BaseCountryViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("NewsDeap", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 mSelectedItem = holder.getAdapterPosition();
                 notifyItemRangeChanged(0, getItemCount());

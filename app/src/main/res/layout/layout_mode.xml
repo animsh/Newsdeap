@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_mode_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,14 +11,15 @@
         android:id="@+id/modeGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        tools:ignore="UselessParent">
 
         <RadioButton
             android:id="@+id/modeDefault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:tag="default"
-            android:text="System Default"
+            android:text="@string/system_default"
             android:textColor="?attr/text_color" />
 
         <RadioButton
@@ -25,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:tag="light"
-            android:text="Light Mode"
+            android:text="@string/light_mode"
             android:textColor="?attr/text_color" />
 
         <RadioButton
@@ -33,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:tag="dark"
-            android:text="Dark Mode"
+            android:text="@string/dark_mode"
             android:textColor="?attr/text_color" />
     </RadioGroup>
 </LinearLayout>

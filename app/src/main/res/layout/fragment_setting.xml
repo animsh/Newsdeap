@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Setting"
+        android:text="@string/setting"
         android:textColor="?attr/text_color"
         android:textSize="34sp"
         android:textStyle="bold" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="5dp"
-        android:text="News Setting"
+        android:text="@string/news_setting"
         android:textColor="?attr/icon_tint_color" />
 
     <LinearLayout
@@ -39,6 +39,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="12dp"
+            android:contentDescription="@string/country_icon"
             android:src="@drawable/ic_round_language_24"
             app:tint="?attr/icon_tint_color" />
 
@@ -50,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Country"
+                android:text="@string/country"
                 android:textColor="?text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -60,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="System Default"
+                android:text="@string/system_default"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
@@ -71,7 +72,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Other"
+        android:text="@string/other"
         android:textColor="?attr/icon_tint_color" />
 
     <LinearLayout
@@ -88,6 +89,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="12dp"
+            android:contentDescription="@string/dark_mode_icon"
             android:src="@drawable/ic_dark_mode_24"
             app:tint="?attr/icon_tint_color" />
 
@@ -99,7 +101,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:textColor="?text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -109,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="System Default"
+                android:text="@string/system_default"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
@@ -128,6 +130,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="12dp"
+            android:contentDescription="@string/about_icon"
             android:src="@drawable/ic_round_info_24"
             app:tint="?attr/icon_tint_color" />
 
@@ -139,7 +142,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About"
+                android:text="@string/about"
                 android:textColor="?text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -148,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="NewsDeap"
+                android:text="@string/about_newsdeap"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

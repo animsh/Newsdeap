@@ -1,5 +1,6 @@
 package com.animsh.newsdeap.util;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.webkit.WebView;
@@ -76,6 +77,7 @@ public class BindingAdapters {
             imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @BindingAdapter("set_webpage")
     public static void setWebPage(WebView webPage, String url) {
         webPage.getSettings().setDomStorageEnabled(true);

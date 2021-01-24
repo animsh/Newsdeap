@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NewsDeap", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
         String selectedMode = sharedPreferences.getString("mode", "default");
         currentCountry = sharedPreferences.getString("c", "in");
 

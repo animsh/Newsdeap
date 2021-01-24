@@ -18,6 +18,7 @@
             glide_url="@{NewsItemImage.urlToImage}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/news_image"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +31,7 @@
             android:layout_height="100dp"
             android:alpha="0.95"
             android:background="?attr/background_color"
+            android:contentDescription="@string/news_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -37,6 +39,7 @@
 
         <TextView
             android:id="@+id/item_news_img_title"
+            style="@style/MyCustomFontTextAppearance"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -44,7 +47,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
             android:ellipsize="end"
-            android:maxLines="4"
+            android:maxLines="3"
             android:scrollHorizontally="true"
             android:text="@{NewsItemImage.title}"
             android:textColor="?attr/text_color"
@@ -102,8 +105,5 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

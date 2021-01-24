@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Newsdeap" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NewsDeap" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_700</item>
         <item name="colorPrimaryVariant">@color/light_bg_color</item>
@@ -17,5 +17,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/boubaround</item>
+    </style>
+
+    <style name="MyCustomFontTextAppearance" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">@font/boubaround_bold</item>
+        <item name="android:fontFamily">@font/boubaround_bold</item>
     </style>
 </resources>

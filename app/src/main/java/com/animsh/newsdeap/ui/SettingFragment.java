@@ -55,7 +55,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myPref = view.getContext().getSharedPreferences("NewsDeap", Context.MODE_PRIVATE);
+        myPref = view.getContext().getSharedPreferences(String.valueOf(R.string.app_name), Context.MODE_PRIVATE);
         selectedMode = myPref.getString("mode", "default");
 
         layoutCountry = view.findViewById(R.id.layout_country);
@@ -81,13 +81,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
         switch (selectedMode) {
             case "default":
-                txtSelectedMode.setText("System Default");
+                txtSelectedMode.setText(R.string.system_default);
                 break;
             case "dark":
-                txtSelectedMode.setText("Dark Mode");
+                txtSelectedMode.setText(R.string.dark_mode);
                 break;
             case "light":
-                txtSelectedMode.setText("Light Mode");
+                txtSelectedMode.setText(R.string.light_mode);
                 break;
         }
     }
@@ -118,7 +118,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 if (dialogMode != null)
                     if (dialogMode.isShowing())
                         dialogMode.dismiss();
-                txtSelectedMode.setText("System Default");
+                txtSelectedMode.setText(R.string.system_default);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 editor = myPref.edit();
                 editor.putString("mode", "default");
@@ -130,7 +130,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 if (dialogMode != null)
                     if (dialogMode.isShowing())
                         dialogMode.dismiss();
-                txtSelectedMode.setText("Dark Mode");
+                txtSelectedMode.setText(R.string.dark_mode);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 editor = myPref.edit();
                 editor.putString("mode", "dark");
@@ -142,7 +142,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 if (dialogMode != null)
                     if (dialogMode.isShowing())
                         dialogMode.dismiss();
-                txtSelectedMode.setText("Light Mode");
+                txtSelectedMode.setText(R.string.light_mode);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 editor = myPref.edit();
                 editor.putString("mode", "light");
