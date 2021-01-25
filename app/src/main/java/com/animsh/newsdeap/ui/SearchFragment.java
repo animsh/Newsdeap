@@ -1,6 +1,7 @@
 package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -69,27 +70,33 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().isEmpty() || !editable.toString().equals("")) {
-                    Retrofit retrofit = RetrofitClient.getClient();
-                    NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-                    Call<NewsCollection> topHeadlinesCall = newsApiCall.getSpecificData(editable.toString(), getString(R.string.api_key));
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!editable.toString().isEmpty() || !editable.toString().equals("")) {
+                            Retrofit retrofit = RetrofitClient.getClient();
+                            NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
+                            Call<NewsCollection> topHeadlinesCall = newsApiCall.getSpecificData(editable.toString(), getString(R.string.api_key));
 
-                    topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
-                        @Override
-                        public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
-                            newsCollection = response.body();
-                            adapter.submitList(newsCollection.getArticles());
-                            adapter.notifyDataSetChanged();
-                        }
+                            topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
+                                @Override
+                                public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
+                                    newsCollection = response.body();
+                                    adapter.submitList(newsCollection.getArticles());
+                                    adapter.notifyDataSetChanged();
+                                }
 
-                        @Override
-                        public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
-                            Log.e(TAG, "onFailure: " + t.getMessage());
+                                @Override
+                                public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
+                                    Log.e(TAG, "onFailure: " + t.getMessage());
+                                }
+                            });
+                        } else {
+                            adapter.submitList(null);
                         }
-                    });
-                } else {
-                    adapter.submitList(null);
-                }
+                    }
+                }, 500);
             }
         });
     }

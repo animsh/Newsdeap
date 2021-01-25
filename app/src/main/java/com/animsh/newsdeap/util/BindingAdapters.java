@@ -1,8 +1,10 @@
 package com.animsh.newsdeap.util;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -28,9 +30,11 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static com.animsh.newsdeap.ui.MainActivity.countryList;
@@ -40,6 +44,10 @@ import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
  * Created by animsh on 1/12/2021.
  */
 public class BindingAdapters {
+
+    static List<Article> articleList = new ArrayList<>();
+    static List<com.animsh.newsdeap.entities.Article> articleDBList = new ArrayList<>();
+
     @BindingAdapter("glide_url")
     public static void loadImage(ImageView imageView, String url) {
         if (url != null && !url.equals("") && !url.isEmpty())
@@ -77,37 +85,109 @@ public class BindingAdapters {
 
     @BindingAdapter("set_checked")
     public static void toggleFavButton(ImageView imageView, Article article) {
-        imageView.setOnClickListener(new View.OnClickListener() {
+        class GetNewsTask extends AsyncTask<Void, Void, List<com.animsh.newsdeap.entities.Article>> {
+            int id = -1;
+
             @Override
-            public void onClick(View view) {
-                final com.animsh.newsdeap.entities.Article articleDB = new com.animsh.newsdeap.entities.Article();
-                articleDB.setSource(article.getSource());
-                articleDB.setAuthor(article.getAuthor());
-                articleDB.setTitle(article.getTitle());
-                articleDB.setDescription(article.getDescription());
-                articleDB.setUrl(article.getUrl());
-                articleDB.setUrlToImage(article.getUrlToImage());
-                articleDB.setPublishedAt(article.getPublishedAt());
-                articleDB.setContent(article.getContent());
-
-                class SaveNewsTask extends AsyncTask<Void, Void, Void> {
-
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        NewsDatabase.getNewsDatabase(imageView.getContext()).newsDao().insertArticle(articleDB);
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                        imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
-                    }
-                }
-                new SaveNewsTask().execute();
+            protected List<com.animsh.newsdeap.entities.Article> doInBackground(Void... voids) {
+                return NewsDatabase
+                        .getNewsDatabase(imageView.getContext()).newsDao().getAllArticles();
             }
-        });
+
+            @Override
+            protected void onPostExecute(List<com.animsh.newsdeap.entities.Article> articles) {
+                super.onPostExecute(articles);
+                Log.d("MY_ARTICLE: ", articles.toString());
+                articleDBList.addAll(articles);
+                for (int i = 0; i < articleDBList.size(); i++) {
+                    Article article1 = new com.animsh.newsdeap.data.Article(
+                            articleDBList.get(i).getSource(),
+                            articleDBList.get(i).getAuthor(),
+                            articleDBList.get(i).getTitle(),
+                            articleDBList.get(i).getDescription(),
+                            articleDBList.get(i).getUrl(),
+                            articleDBList.get(i).getUrlToImage(),
+                            articleDBList.get(i).getPublishedAt(),
+                            articleDBList.get(i).getContent());
+                    articleList.add(article1);
+
+                    if (article1.getTitle().equals(article.getTitle())) {
+                        id = articleDBList.get(i).getId();
+                    }
+
+                }
+                if (id != -1) {
+                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+                } else {
+                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
+                }
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        performTask(imageView.getContext(), article, imageView, id);
+                    }
+                });
+            }
+        }
+        new GetNewsTask().execute();
     }
+
+    private static void performTask(Context context, Article article, ImageView imageView, int id) {
+        final com.animsh.newsdeap.entities.Article articleDB = new com.animsh.newsdeap.entities.Article();
+        if (id != -1) {
+            articleDB.setId(id);
+            articleDB.setSource(article.getSource());
+            articleDB.setAuthor(article.getAuthor());
+            articleDB.setTitle(article.getTitle());
+            articleDB.setDescription(article.getDescription());
+            articleDB.setUrl(article.getUrl());
+            articleDB.setUrlToImage(article.getUrlToImage());
+            articleDB.setPublishedAt(article.getPublishedAt());
+            articleDB.setContent(article.getContent());
+            class DeleteNewsTask extends AsyncTask<Void, Void, Void> {
+
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    NewsDatabase.getNewsDatabase(context).newsDao().deleteArticle(articleDB);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    imageView.setColorFilter(ContextCompat.getColor(context, R.color.dark_icon_tint_color));
+                }
+            }
+            new DeleteNewsTask().execute();
+
+        } else {
+            articleDB.setSource(article.getSource());
+            articleDB.setAuthor(article.getAuthor());
+            articleDB.setTitle(article.getTitle());
+            articleDB.setDescription(article.getDescription());
+            articleDB.setUrl(article.getUrl());
+            articleDB.setUrlToImage(article.getUrlToImage());
+            articleDB.setPublishedAt(article.getPublishedAt());
+            articleDB.setContent(article.getContent());
+
+            class SaveNewsTask extends AsyncTask<Void, Void, Void> {
+
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    NewsDatabase.getNewsDatabase(context).newsDao().insertArticle(articleDB);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    imageView.setColorFilter(ContextCompat.getColor(context, R.color.red));
+                }
+            }
+            new SaveNewsTask().execute();
+        }
+    }
+
 
     @SuppressLint("SetJavaScriptEnabled")
     @BindingAdapter("set_webpage")

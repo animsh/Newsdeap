@@ -63,7 +63,9 @@ public class NewsFavFragment extends Fragment {
             protected void onPostExecute(List<Article> articles) {
                 super.onPostExecute(articles);
                 Log.d("MY_ARTICLE: ", articles.toString());
+                articleDBList.clear();
                 articleDBList.addAll(articles);
+                articleList.clear();
                 for (int i = 0; i < articleDBList.size(); i++) {
                     articleList.add(new com.animsh.newsdeap.data.Article(
                             articleDBList.get(i).getSource(),
@@ -74,11 +76,9 @@ public class NewsFavFragment extends Fragment {
                             articleDBList.get(i).getUrlToImage(),
                             articleDBList.get(i).getPublishedAt(),
                             articleDBList.get(i).getContent()));
-                    Log.d(TAG, "onPostExecute: " + articleList.size() + articleList.get(i).getTitle());
                 }
                 newsRecyclerView.setAdapter(adapter);
                 adapter.submitList(articleList);
-                Log.d(TAG, "onPostExecute: " + articleList.size() + articleList.get(0).getTitle());
             }
         }
 
@@ -90,5 +90,11 @@ public class NewsFavFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news_fav, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNews();
     }
 }
