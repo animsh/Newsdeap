@@ -39,7 +39,10 @@ import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
 public class BindingAdapters {
     @BindingAdapter("glide_url")
     public static void loadImage(ImageView imageView, String url) {
-        Glide.with(imageView.getContext()).load(url).into(imageView);
+        if (url != null && !url.equals("") && !url.isEmpty())
+            Glide.with(imageView.getContext()).load(url).into(imageView);
+        else
+            imageView.setVisibility(View.GONE);
     }
 
     @BindingAdapter("glide_circular_url")
@@ -71,10 +74,18 @@ public class BindingAdapters {
 
     @BindingAdapter("set_checked")
     public static void toggleFavButton(ImageView imageView, boolean isFav) {
-        if (isFav)
-            imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
-        else
-            imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (isFav) {
+//                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+//                } else {
+//                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
+//                }
+                imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+
+            }
+        });
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -86,6 +97,12 @@ public class BindingAdapters {
         webPage.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webPage.setWebViewClient(new WebViewClient());
         webPage.loadUrl(url);
+    }
+
+    @BindingAdapter("set_flag")
+    public static void setCountryFlag(ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().into(imageView);
+
     }
 
     @BindingAdapter("set_time_date")

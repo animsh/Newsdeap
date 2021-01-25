@@ -22,4 +22,8 @@ public class Country {
     public String getAbbreviation() {
         return abbreviation;
     }
+
+    public String getCountryFlag() {
+        return "https://www.countryflags.io/" + abbreviation.toLowerCase() + "/flat/64.png";
+    }
 }

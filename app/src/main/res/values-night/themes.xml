@@ -9,6 +9,7 @@
         <item name="background_color">@color/dark_primary_color</item>
         <item name="search_color">#1F1F1F</item>
         <item name="icon_tint_color">@color/dark_icon_tint_color</item>
+        <item name="indicator_color">@color/indicator</item>
         <item name="android:textColorSecondary">@color/dark_icon_tint_color</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple_700</item>

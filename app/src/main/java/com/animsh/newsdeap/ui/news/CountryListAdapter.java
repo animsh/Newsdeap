@@ -44,9 +44,9 @@ public class CountryListAdapter extends ListAdapter<Country, BaseCountryViewHold
     public void onBindViewHolder(@NonNull BaseCountryViewHolder holder, int position) {
         holder.bindData(getItem(position));
         if (getItem(position).getAbbreviation().toLowerCase().equals(currentCountry)) {
-            ((RadioButton) holder.itemView).setChecked(true);
+            ((RadioButton) holder.itemView.findViewById(R.id.radioButton)).setChecked(true);
         } else {
-            ((RadioButton) holder.itemView).setChecked(position == mSelectedItem);
+            ((RadioButton) holder.itemView.findViewById(R.id.radioButton)).setChecked(position == mSelectedItem);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

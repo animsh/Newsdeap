@@ -1,44 +1,21 @@
 package com.animsh.newsdeap.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.animsh.newsdeap.R;
-import com.animsh.newsdeap.data.Article;
-import com.animsh.newsdeap.data.NewsCollection;
-import com.animsh.newsdeap.ui.news.DiffUtilNewsItemCallback;
-import com.animsh.newsdeap.ui.news.NewsListAdapter;
-import com.animsh.newsdeap.util.NewsApiCall;
-import com.animsh.newsdeap.util.RetrofitClient;
-
-import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
-import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 public class NewsListFragment extends Fragment {
-
-    private static final String TAG = "NEWS_List";
-    RecyclerView newsRecyclerView;
-    NewsListAdapter adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
-    NewsCollection newsCollection;
 
     public NewsListFragment() {
     }
@@ -46,69 +23,24 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        newsRecyclerView = view.findViewById(R.id.rv_news_list);
-        newsRecyclerView.setHasFixedSize(true);
-        newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        adapter = new NewsListAdapter(new DiffUtilNewsItemCallback());
-        newsRecyclerView.setAdapter(adapter);
 
-        Retrofit retrofit = RetrofitClient.getClient();
-        NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, getString(R.string.api_key));
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getChildFragmentManager(), FragmentPagerItems.with(requireContext())
+                .add("General", GeneralNewsFragment.class)
+                .add("Business", BusinessNewsFragment.class)
+                .add("Entertainment", EntertainmentNewsFragment.class)
+                .add("Health", HealthNewsFragment.class)
+                .add("Science", ScienceNewsFragment.class)
+                .add("Sports", SportsNewsFragment.class)
+                .add("Technology", TechnologyNewsFragment.class)
+                .create());
 
-        topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
-            @Override
-            public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
-                newsCollection = response.body();
-                adapter.submitList(newsCollection.getArticles());
-                adapter.notifyDataSetChanged();
-            }
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager.setAdapter(adapter);
 
-            @Override
-            public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getMessage());
-            }
-        });
+        SmartTabLayout viewPagerTab = view.findViewById(R.id.newsTab);
+        viewPagerTab.setViewPager(viewPager);
 
-        swipeRefreshLayout = view.findViewById(R.id.newsLisSwipe);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.submitList(newsCollection.getArticles());
-                        swipeRefreshLayout.setRefreshing(false);
-
-                        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                            @Override
-                            public void onItemRangeInserted(int positionStart, int itemCount) {
-                                super.onItemRangeInserted(positionStart, itemCount);
-                                newsRecyclerView.smoothScrollToPosition(positionStart);
-                            }
-                        });
-                    }
-                }, 500);
-            }
-        });
-
-        adapter.setOnNewsItemClickListener(new NewsListAdapter.OnNewsItemClickEvent() {
-            @Override
-            public void onItemTextClick(Article item) {
-
-            }
-
-            @Override
-            public void onItemImageClick(Article item) {
-                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onItemLongClick() {
-
-            }
-        });
     }
 
     @Override

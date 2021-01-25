@@ -6,14 +6,14 @@ import java.io.Serializable;
  * Created by animsh on 1/18/2021.
  */
 public class Article implements Serializable {
-    private NewsSource source; // News Source
-    private String author; // News Author
-    private String title; // News Title
-    private String description; // News Description
-    private String url; // News URL
-    private String urlToImage; // News Image URL
-    private String publishedAt; // News Published Date
-    private String content; // News Content
+    private final NewsSource source; // News Source
+    private final String author; // News Author
+    private final String title; // News Title
+    private final String description; // News Description
+    private final String url; // News URL
+    private final String urlToImage; // News Image URL
+    private final String publishedAt; // News Published Date
+    private final String content; // News Content
 
     public Article(NewsSource source, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.source = source;
@@ -56,5 +56,9 @@ public class Article implements Serializable {
 
     public String getContent() {
         return content;
+    }
+
+    public boolean getFav() {
+        return false;
     }
 }

@@ -8,12 +8,28 @@
             type="com.animsh.newsdeap.data.Country" />
     </data>
 
-    <RadioButton
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@{CountryItem.country}"
-        android:textColor="?attr/text_color" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:text="@{CountryItem.country}"
+            android:textColor="?attr/text_color" />
+
+        <ImageView
+            set_flag="@{CountryItem.countryFlag}"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
 
 </layout>

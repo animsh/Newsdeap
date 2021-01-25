@@ -35,7 +35,7 @@ public class NewsListAdapter extends ListAdapter<Article, BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position).getUrlToImage() != null) {
+        if (getItem(position).getUrlToImage() != null && !getItem(position).getUrlToImage().isEmpty() && !getItem(position).getUrlToImage().equals("")) {
             return 1;
         } else {
             return 0;

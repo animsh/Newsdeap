@@ -9,6 +9,7 @@
         <item name="background_color">@color/light_bg_color</item>
         <item name="search_color">@color/white</item>
         <item name="icon_tint_color">?attr/colorControlNormal</item>
+        <item name="indicator_color">@color/indicator</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple_700</item>
         <item name="colorSecondaryVariant">@color/purple_700</item>

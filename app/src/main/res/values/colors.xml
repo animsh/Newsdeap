@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ripple_color">#1F6200EE</color>
+    <color name="indicator">#7F6200EE</color>
 
     <!--    // news image background color-->
     <color name="purple">#905EE8</color>
