@@ -73,7 +73,7 @@
 
                         <ImageView
                             android:id="@+id/details_img_fav"
-                            set_checked="@{NewsItemData.fav}"
+                            set_checked="@{NewsItemData}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/add_to_favorite_news_button"

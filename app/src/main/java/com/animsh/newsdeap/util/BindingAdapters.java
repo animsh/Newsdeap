@@ -2,6 +2,7 @@ package com.animsh.newsdeap.util;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,6 +15,8 @@ import androidx.databinding.BindingAdapter;
 import androidx.palette.graphics.Palette;
 
 import com.animsh.newsdeap.R;
+import com.animsh.newsdeap.data.Article;
+import com.animsh.newsdeap.database.NewsDatabase;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -73,17 +76,35 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("set_checked")
-    public static void toggleFavButton(ImageView imageView, boolean isFav) {
+    public static void toggleFavButton(ImageView imageView, Article article) {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (isFav) {
-//                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
-//                } else {
-//                    imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.dark_icon_tint_color));
-//                }
-                imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+                final com.animsh.newsdeap.entities.Article articleDB = new com.animsh.newsdeap.entities.Article();
+                articleDB.setSource(article.getSource());
+                articleDB.setAuthor(article.getAuthor());
+                articleDB.setTitle(article.getTitle());
+                articleDB.setDescription(article.getDescription());
+                articleDB.setUrl(article.getUrl());
+                articleDB.setUrlToImage(article.getUrlToImage());
+                articleDB.setPublishedAt(article.getPublishedAt());
+                articleDB.setContent(article.getContent());
 
+                class SaveNewsTask extends AsyncTask<Void, Void, Void> {
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        NewsDatabase.getNewsDatabase(imageView.getContext()).newsDao().insertArticle(articleDB);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), R.color.red));
+                    }
+                }
+                new SaveNewsTask().execute();
             }
         });
     }

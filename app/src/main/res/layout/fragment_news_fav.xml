@@ -7,7 +7,7 @@
     tools:context=".ui.NewsFavFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_fav_news"
+        android:id="@+id/rv_news_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
