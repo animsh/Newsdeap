@@ -57,8 +57,4 @@ public class Article implements Serializable {
     public String getContent() {
         return content;
     }
-
-    public boolean getFav() {
-        return false;
-    }
 }

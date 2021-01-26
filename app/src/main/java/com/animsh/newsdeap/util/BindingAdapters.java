@@ -2,6 +2,7 @@ package com.animsh.newsdeap.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -47,6 +48,20 @@ public class BindingAdapters {
 
     static List<Article> articleList = new ArrayList<>();
     static List<com.animsh.newsdeap.entities.Article> articleDBList = new ArrayList<>();
+
+    @BindingAdapter("share_link")
+    public static void shareLink(ImageView imageView, String url) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.putExtra(Intent.EXTRA_TEXT, url);
+                share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                share.setType("text/plain");
+                imageView.getContext().startActivity(Intent.createChooser(share, "Share Article"));
+            }
+        });
+    }
 
     @BindingAdapter("glide_url")
     public static void loadImage(ImageView imageView, String url) {

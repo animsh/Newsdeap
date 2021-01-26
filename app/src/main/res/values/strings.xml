@@ -22,4 +22,7 @@
     <string name="home">Home</string>
     <string name="fav">Fav</string>
     <string name="search">Search</string>
+    <string name="back_button">Back Button</string>
+    <string name="share_button">Share Button</string>
+    <string name="article">Article</string>
 </resources>
