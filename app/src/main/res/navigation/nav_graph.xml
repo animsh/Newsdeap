@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_news_list" />
     <fragment
         android:id="@+id/newsFavFragment"
-        android:name="com.animsh.newsdeap.ui.NewsFavFragment"
+        android:name="com.animsh.newsdeap.ui.home.NewsFavFragment"
         android:label="fragment_news_fav"
         tools:layout="@layout/fragment_news_fav" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.animsh.newsdeap.ui.SearchFragment"
+        android:name="com.animsh.newsdeap.ui.home.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.animsh.newsdeap.ui.SettingFragment"
+        android:name="com.animsh.newsdeap.ui.home.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>

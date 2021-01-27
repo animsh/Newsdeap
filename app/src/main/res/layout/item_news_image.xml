@@ -9,101 +9,109 @@
             type="com.animsh.newsdeap.data.Article" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.skydoves.transformationlayout.TransformationLayout
+        android:id="@+id/transformationLayout"
+        open_article="@{NewsItemImage}"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="wrap_content"
+        app:transformation_duration="550">
 
-        <ImageView
-            android:id="@+id/item_news_img_newsimg"
-            glide_url="@{NewsItemImage.urlToImage}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/news_image"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:alpha="0.95"
-            android:background="?attr/background_color"
-            android:contentDescription="@string/news_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <TextView
-            android:id="@+id/item_news_img_title"
-            style="@style/MyCustomFontTextAppearance"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="5dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:scrollHorizontally="true"
-            android:text="@{NewsItemImage.title}"
-            android:textColor="?attr/text_color"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-        <LinearLayout
-            android:id="@+id/container"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="250dp">
+
+            <ImageView
+                android:id="@+id/item_news_img_newsimg"
+                glide_url="@{NewsItemImage.urlToImage}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/news_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:alpha="0.95"
+                android:background="?attr/background_color"
+                android:contentDescription="@string/news_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
 
             <TextView
-                android:id="@+id/item_news_img_username"
+                android:id="@+id/item_news_img_title"
+                style="@style/MyCustomFontTextAppearance"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:text="@{NewsItemImage.source.name}"
-                android:textAlignment="textStart"
-                android:textColor="?attr/text_color"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/item_news_date"
-                set_time_date="@{NewsItemImage.publishedAt}"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
+                android:layout_marginBottom="5dp"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:scrollHorizontally="true"
-                android:textAlignment="textEnd"
+                android:text="@{NewsItemImage.title}"
                 android:textColor="?attr/text_color"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/item_news_img_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:text="@{NewsItemImage.source.name}"
+                    android:textAlignment="textStart"
+                    android:textColor="?attr/text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_news_date"
+                    set_time_date="@{NewsItemImage.publishedAt}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:textAlignment="textEnd"
+                    android:textColor="?attr/text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/item_news_img_title"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.skydoves.transformationlayout.TransformationLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.animsh.newsdeap.ui;
+package com.animsh.newsdeap.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;

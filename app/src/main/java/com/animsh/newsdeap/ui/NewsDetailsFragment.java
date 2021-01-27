@@ -11,6 +11,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.databinding.FragmentNewsDetailsBinding;
+import com.skydoves.transformationlayout.TransformationCompat;
+import com.skydoves.transformationlayout.TransformationLayout;
 
 public class NewsDetailsFragment extends AppCompatActivity {
 
@@ -18,6 +20,8 @@ public class NewsDetailsFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TransformationLayout.Params params = getIntent().getParcelableExtra("TransformationParams");
+        TransformationCompat.onTransformationEndContainer(this, params);
         super.onCreate(savedInstanceState);
         Article article = (Article) getIntent().getSerializableExtra("Article");
         FragmentNewsDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.fragment_news_details);

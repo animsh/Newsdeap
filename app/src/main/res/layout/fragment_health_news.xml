@@ -4,7 +4,7 @@
     android:id="@+id/swipeToRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HealthNewsFragment">
+    tools:context=".ui.home.HealthNewsFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

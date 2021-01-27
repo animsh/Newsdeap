@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -20,12 +21,14 @@ import androidx.palette.graphics.Palette;
 import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.data.Article;
 import com.animsh.newsdeap.database.NewsDatabase;
+import com.animsh.newsdeap.ui.NewsDetailsFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.skydoves.transformationlayout.TransformationLayout;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -48,6 +51,20 @@ public class BindingAdapters {
 
     static List<Article> articleList = new ArrayList<>();
     static List<com.animsh.newsdeap.entities.Article> articleDBList = new ArrayList<>();
+
+    @BindingAdapter("open_article")
+    public static void openArticle(TransformationLayout transformationLayout, Article article) {
+        transformationLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = transformationLayout.withContext(transformationLayout.getContext(), "myTransitionName");
+                Intent intent = new Intent(transformationLayout.getContext(), NewsDetailsFragment.class);
+                intent.putExtra("Article", article);
+                intent.putExtra("TransformationParams", transformationLayout.getParcelableParams());
+                transformationLayout.getContext().startActivity(intent, bundle);
+            }
+        });
+    }
 
     @BindingAdapter("share_link")
     public static void shareLink(ImageView imageView, String url) {

@@ -17,8 +17,8 @@ import com.animsh.newsdeap.databinding.ItemCountryBinding;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
-import static com.animsh.newsdeap.ui.SettingFragment.dialogCountry;
-import static com.animsh.newsdeap.ui.SettingFragment.txtCurrentCountry;
+import static com.animsh.newsdeap.ui.home.SettingFragment.dialogCountry;
+import static com.animsh.newsdeap.ui.home.SettingFragment.txtCurrentCountry;
 
 /**
  * Created by animsh on 1/22/2021.

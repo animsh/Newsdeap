@@ -1,4 +1,4 @@
-package com.animsh.newsdeap.ui;
+package com.animsh.newsdeap.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,15 +31,15 @@ import retrofit2.Retrofit;
 
 import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
 
-public class TechnologyNewsFragment extends Fragment {
+public class ScienceNewsFragment extends Fragment {
 
     RecyclerView newsRecyclerView;
     NewsListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
     NewsCollection newsCollection;
-    String TAG = "T_NEWS";
+    String TAG = "S_NEWS";
 
-    public TechnologyNewsFragment() {
+    public ScienceNewsFragment() {
         // Required empty public constructor
     }
 
@@ -50,7 +50,6 @@ public class TechnologyNewsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         newsRecyclerView = view.findViewById(R.id.rv_news_list);
         newsRecyclerView.setHasFixedSize(true);
         newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -61,7 +60,7 @@ public class TechnologyNewsFragment extends Fragment {
 
         Retrofit retrofit = RetrofitClient.getClient();
         NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, "technology", getString(R.string.api_key));
+        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, "science", getString(R.string.api_key));
 
         topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
             @Override
@@ -106,6 +105,6 @@ public class TechnologyNewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_technology_news, container, false);
+        return inflater.inflate(R.layout.fragment_science_news, container, false);
     }
 }

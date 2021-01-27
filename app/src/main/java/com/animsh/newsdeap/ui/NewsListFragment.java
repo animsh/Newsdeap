@@ -11,6 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.animsh.newsdeap.R;
+import com.animsh.newsdeap.ui.home.BusinessNewsFragment;
+import com.animsh.newsdeap.ui.home.EntertainmentNewsFragment;
+import com.animsh.newsdeap.ui.home.GeneralNewsFragment;
+import com.animsh.newsdeap.ui.home.HealthNewsFragment;
+import com.animsh.newsdeap.ui.home.ScienceNewsFragment;
+import com.animsh.newsdeap.ui.home.SportsNewsFragment;
+import com.animsh.newsdeap.ui.home.TechnologyNewsFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;

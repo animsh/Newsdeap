@@ -1,4 +1,4 @@
-package com.animsh.newsdeap.ui;
+package com.animsh.newsdeap.ui.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

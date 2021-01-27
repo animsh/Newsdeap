@@ -10,63 +10,70 @@
             type="com.animsh.newsdeap.data.Article" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.skydoves.transformationlayout.TransformationLayout
+        android:id="@+id/transformationLayout"
+        open_article="@{NewsItemText}"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="?attr/background_color">
+        android:layout_height="wrap_content"
+        app:transformation_duration="550">
 
-        <TextView
-            android:id="@+id/item_news_text_title"
-            style="@style/MyCustomFontTextAppearance"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:scrollHorizontally="true"
-            android:text="@{NewsItemText.title}"
-            android:textColor="?attr/text_color"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="?attr/background_color">
 
-        <TextView
-            android:id="@+id/item_news_text_content"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:ellipsize="end"
-            android:maxLines="10"
-            android:scrollHorizontally="true"
-            android:text="@{NewsItemText.content}"
-            android:textColor="?attr/text_color"
-            app:layout_constraintBottom_toTopOf="@+id/item_news_text_username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_news_text_title" />
+            <TextView
+                android:id="@+id/item_news_text_title"
+                style="@style/MyCustomFontTextAppearance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:scrollHorizontally="true"
+                android:text="@{NewsItemText.title}"
+                android:textColor="?attr/text_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/item_news_text_username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:text="@{NewsItemText.source.name}"
-            android:textColor="?attr/text_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/item_news_text_content"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/item_news_text_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:maxLines="10"
+                android:scrollHorizontally="true"
+                android:text="@{NewsItemText.content}"
+                android:textColor="?attr/text_color"
+                app:layout_constraintBottom_toTopOf="@+id/item_news_text_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_news_text_title" />
 
+            <TextView
+                android:id="@+id/item_news_text_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:text="@{NewsItemText.source.name}"
+                android:textColor="?attr/text_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/item_news_text_content"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.skydoves.transformationlayout.TransformationLayout>
 </layout>

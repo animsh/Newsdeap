@@ -81,4 +81,7 @@ dependencies {
 
     //Optional: see how to use the utility.
     compile 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+
+    // Transformation
+    implementation "com.github.skydoves:transformationlayout:1.0.6"
 }

@@ -1,4 +1,4 @@
-package com.animsh.newsdeap.ui;
+package com.animsh.newsdeap.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,15 +31,15 @@ import retrofit2.Retrofit;
 
 import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
 
-public class SportsNewsFragment extends Fragment {
+public class BusinessNewsFragment extends Fragment {
 
     RecyclerView newsRecyclerView;
     NewsListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
     NewsCollection newsCollection;
-    String TAG = "s_NEWS";
+    String TAG = "B_NEWS";
 
-    public SportsNewsFragment() {
+    public BusinessNewsFragment() {
         // Required empty public constructor
     }
 
@@ -61,7 +61,7 @@ public class SportsNewsFragment extends Fragment {
 
         Retrofit retrofit = RetrofitClient.getClient();
         NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, "sports", getString(R.string.api_key));
+        Call<NewsCollection> topHeadlinesCall = newsApiCall.getTopHeadLines(currentCountry, "business", getString(R.string.api_key));
 
         topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
             @Override
@@ -106,6 +106,6 @@ public class SportsNewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sports_news, container, false);
+        return inflater.inflate(R.layout.fragment_business_news, container, false);
     }
 }
