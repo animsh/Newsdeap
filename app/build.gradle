@@ -84,4 +84,8 @@ dependencies {
 
     // Transformation
     implementation "com.github.skydoves:transformationlayout:1.0.6"
+
+    // Lottie files
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

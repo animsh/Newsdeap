@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.data.NewsCollection;
 import com.animsh.newsdeap.ui.news.DiffUtilNewsItemCallback;
 import com.animsh.newsdeap.ui.news.NewsListAdapter;
+import com.animsh.newsdeap.util.NetworkUtil;
 import com.animsh.newsdeap.util.NewsApiCall;
 import com.animsh.newsdeap.util.RetrofitClient;
 
@@ -56,49 +59,60 @@ public class SearchFragment extends Fragment {
         newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         adapter = new NewsListAdapter(new DiffUtilNewsItemCallback());
         newsRecyclerView.setAdapter(adapter);
+        LottieAnimationView lottieAnimationView = view.findViewById(R.id.animationView);
+        if (NetworkUtil.hasNetwork(getContext())) {
+            searchEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
 
-            }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
 
-            }
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!editable.toString().isEmpty() || !editable.toString().equals("")) {
+                                Retrofit retrofit = RetrofitClient.getClient();
+                                NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
+                                Call<NewsCollection> topHeadlinesCall = newsApiCall.getSpecificData(editable.toString(), getString(R.string.api_key));
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!editable.toString().isEmpty() || !editable.toString().equals("")) {
-                            Retrofit retrofit = RetrofitClient.getClient();
-                            NewsApiCall newsApiCall = retrofit.create(NewsApiCall.class);
-                            Call<NewsCollection> topHeadlinesCall = newsApiCall.getSpecificData(editable.toString(), getString(R.string.api_key));
+                                topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
+                                    @Override
+                                    public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
+                                        newsCollection = response.body();
+                                        if (!newsCollection.getArticles().isEmpty() && newsCollection.getArticles().size() != 0 && newsCollection.getArticles() != null) {
+                                            lottieAnimationView.setVisibility(View.GONE);
+                                            adapter.submitList(newsCollection.getArticles());
+                                            adapter.notifyDataSetChanged();
+                                        } else {
+                                            lottieAnimationView.setVisibility(View.VISIBLE);
+                                        }
+                                    }
 
-                            topHeadlinesCall.enqueue(new Callback<NewsCollection>() {
-                                @Override
-                                public void onResponse(@NotNull Call<NewsCollection> call, @NotNull Response<NewsCollection> response) {
-                                    newsCollection = response.body();
-                                    adapter.submitList(newsCollection.getArticles());
-                                    adapter.notifyDataSetChanged();
-                                }
-
-                                @Override
-                                public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
-                                    Log.e(TAG, "onFailure: " + t.getMessage());
-                                }
-                            });
-                        } else {
-                            adapter.submitList(null);
+                                    @Override
+                                    public void onFailure(@NotNull Call<NewsCollection> call, @NotNull Throwable t) {
+                                        Log.e(TAG, "onFailure: " + t.getMessage());
+                                    }
+                                });
+                            } else {
+                                adapter.submitList(null);
+                            }
                         }
-                    }
-                }, 500);
-            }
-        });
+                    }, 500);
+                }
+            });
+        } else {
+            Toast.makeText(getContext(), "No Internet Connection!!", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 

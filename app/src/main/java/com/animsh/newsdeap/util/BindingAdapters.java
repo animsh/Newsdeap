@@ -130,6 +130,8 @@ public class BindingAdapters {
             protected void onPostExecute(List<com.animsh.newsdeap.entities.Article> articles) {
                 super.onPostExecute(articles);
                 Log.d("MY_ARTICLE: ", articles.toString());
+                articleList.clear();
+                articleDBList.clear();
                 articleDBList.addAll(articles);
                 for (int i = 0; i < articleDBList.size(); i++) {
                     Article article1 = new com.animsh.newsdeap.data.Article(

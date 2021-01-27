@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.animsh.newsdeap.R;
 import com.animsh.newsdeap.ui.news.CountryListAdapter;
 import com.animsh.newsdeap.ui.news.DiffUtilCountryItemCallback;
+import com.animsh.newsdeap.util.NetworkUtil;
 
 import static com.animsh.newsdeap.ui.MainActivity.countryList;
 import static com.animsh.newsdeap.ui.MainActivity.currentCountry;
@@ -57,6 +58,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         myPref = view.getContext().getSharedPreferences(String.valueOf(R.string.app_name), Context.MODE_PRIVATE);
         selectedMode = myPref.getString("mode", "default");
+
+        if (!NetworkUtil.hasNetwork(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection!!", Toast.LENGTH_SHORT).show();
+        }
 
         layoutCountry = view.findViewById(R.id.layout_country);
         layoutMode = view.findViewById(R.id.layout_mode);
@@ -105,14 +110,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         switch (view.getTag().toString()) {
             case "layoutCountry":
                 showCountryDialog(view.getContext());
-                Toast.makeText(getContext(), view.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "layoutMode":
                 showModeDialog(view.getContext());
-                Toast.makeText(getContext(), view.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "layoutAbout":
-                Toast.makeText(getContext(), view.getTag().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case "default":
                 if (dialogMode != null)
@@ -159,7 +161,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             View view = LayoutInflater.from(context).inflate(
                     R.layout.layout_mode,
-                    (ViewGroup) ((Activity) context).findViewById(R.id.layout_mode_container)
+                    ((Activity) context).findViewById(R.id.layout_mode_container)
             );
             builder.setView(view);
 
@@ -192,7 +194,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
             View view = LayoutInflater.from(requireContext()).inflate(
                     R.layout.layout_country,
-                    (ViewGroup) ((Activity) requireContext()).findViewById(R.id.layout_country_container)
+                    ((Activity) requireContext()).findViewById(R.id.layout_country_container)
             );
             builder.setView(view);
 
