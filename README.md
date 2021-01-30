@@ -9,6 +9,14 @@
   <a href="https://github.com/animsh"><img alt="Profile" src="https://img.shields.io/static/v1?label=GitHub&message=animsh&color=E53935"/></a>
 </p>
 
+<p align="center">  
+NewsDeap is a small demo application based on modern Android application tech-stacks.
+</br>
+
+<p align="center">
+<img src="/images/preview.png"/>
+</p>
+
 ## Download
 Go to the [Releases](https://github.com/animsh/Newsdeap/releases) to download the latest APK.
 
@@ -25,6 +33,13 @@ Go to the [Releases](https://github.com/animsh/Newsdeap/releases) to download th
   - [TransformationLayout](https://github.com/skydoves/TransformationLayout) - 🌠 Transform into a different view or activity using morphing animations.
   - [Lottie for Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android and iOS, Web, and React Native.
   
+## Open API
+
+<img src="/images/api.png" align="right" width="21%"/>
+
+News App using the [NewsApi](https://newsapi.org/) for constructing RESTful API.<br>
+News API is a simple HTTP REST API for searching and retrieving live articles from all over the web.
+
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/animsh/Newsdeap/stargazers)__ for this repository. :star: <br>
 And __[follow](https://github.com/animsh)__ me for my next creations! 🤩
